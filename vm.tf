@@ -1,5 +1,5 @@
 resource "hcloud_server" "jump_host" {
-  name        = "jump_host"
+  name        = "jump-host"
   server_type = "cx23"
   image       = "ubuntu-24.04"
   location    = "nbg1"
