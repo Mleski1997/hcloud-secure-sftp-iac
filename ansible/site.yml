@@ -1,0 +1,11 @@
+- name : Apply common configuration to all servers
+  hosts: all
+  become: true
+  roles:
+    - common
+
+- name: Setup sftp server
+  hosts: sftp
+  become: true
+  roles:
+    - sftp_server

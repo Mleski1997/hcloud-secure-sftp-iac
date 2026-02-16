@@ -1,12 +1,4 @@
-- name: Configuration all servers
-  hosts: all
-  become: true
 
-  vars:
-    username: deployer
-  
-
-  tasks:
     - name: Update and upgrade apt packages
       apt:
         update_cache: yes
@@ -50,9 +42,3 @@
         line: 'PasswordAuthentication no'
         backup: yes
       notify: Restart ssh
-
-  handlers:
-    - name: Restart ssh
-      service:
-        name: ssh
-        state: restarted

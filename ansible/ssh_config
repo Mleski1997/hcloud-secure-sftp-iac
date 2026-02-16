@@ -1,0 +1,11 @@
+Host jump_host
+    HostName 46.225.133.149
+    User deployer
+    IdentityFile /home/michal/.ssh/id_ed25519
+
+Host 10.0.1.*
+    HostName 10.0.1.10
+    User deployer
+    ProxyJump jump_host
+    StrictHostKeyChecking no
+    IdentityFile /home/michal/.ssh/id_ed25519
