@@ -1,0 +1,48 @@
+- name: Create sftp group
+  group:
+    name: sftp-group
+    state: present
+
+- name: Create sftp user
+  user:
+    name: "{{ item.name }}"
+    group: sftp-group
+    shell: /usr/sbin/nologin
+    state: present
+  loop: "{{ sftp_users }}"
+
+- name: Add authorized key for sftp user
+  authorized_key: 
+    user: "{{ item.name }}"
+    state: present
+    key: "{{ item.key }}"
+  loop: "{{ sftp_users }}"
+
+- name: Create directory
+  file:
+    path: "/home/{{ item.name }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  loop: "{{ sftp_users }}"
+    
+- name: Create sftp directory
+  file:
+    path: "/home/{{ item.name }}/sftp"
+    state: directory
+    owner: "{{ item.name }}"
+    group: sftp-group
+    mode: '0750'
+  loop: "{{ sftp_users }}"
+
+- name: Configure sshd for sftp
+  blockinfile:
+    path: /etc/ssh/sshd_config
+    block: |
+      Match Group sftp-group
+        ChrootDirectory /home/%u
+        AllowTcpForwarding no
+        X11Forwarding no
+        ForceCommand internal-sftp
+  notify: Restart ssh
