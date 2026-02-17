@@ -9,3 +9,16 @@
   become: true
   roles:
     - sftp_server
+
+- name: Create test file 
+  hosts: jump_host
+  become: true
+  tasks:
+  roles:
+    - test
+
+- name: Setup jump host
+  hosts: jump_host
+  become: true
+  roles:
+    - jump_host

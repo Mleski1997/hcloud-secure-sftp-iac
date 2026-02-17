@@ -1,0 +1,5 @@
+- name: Create test file
+  file: 
+    path: /tmp/raport.txt
+    state: touch
+    
