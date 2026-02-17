@@ -13,7 +13,6 @@
 - name: Create test file 
   hosts: jump_host
   become: true
-  tasks:
   roles:
     - test
 
