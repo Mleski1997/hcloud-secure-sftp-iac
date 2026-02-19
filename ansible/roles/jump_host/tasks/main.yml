@@ -3,30 +3,9 @@
     name: "{{ jump_host_packages }}"
     state: present
 
-# - name: Ensure fail2ban is running
-#   service:
-#     name: fail2ban
-#     state: started
-#     enabled: true
+- name: Ensure fail2ban is running
+  service:
+    name: fail2ban
+    state: started
+    enabled: true
 
-# - name: Configure SSH for bastion
-#   lineinfile:
-#     path: /etc/ssh/sshd_config
-#     regexp: "{{ item.regexp }}"
-#     line: "{{ item.line }}"
-#   loop: 
-#     - { regexp: '^#?Port', line: 'Port 2222' }
-#     - { regexp: '^#?AllowTcpForwarding', line: 'AllowTcpForwarding yes' }
-#     - { regexp: '^#?X11Forwarding', line: 'X11Forwarding no' }
-#   notify: Restart ssh
-
-# - name: Configure UFW
-#   ufw:
-#     rule: allow
-#     port: 2222
-#     proto: tcp
-
-# - name: Enable UFW
-#   ufw:
-#     state: enabled
-    

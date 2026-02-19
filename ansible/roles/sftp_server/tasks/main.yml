@@ -1,13 +1,13 @@
 
 - name: Create sftp group
   group:
-    name: sftp-group
+    name: "{{ sftp_group_name }}"
     state: present
 
 - name: Create sftp user
   user:
     name: "{{ item.name }}"
-    group: sftp-group
+    group: "{{ sftp_group_name }}"
     shell: /usr/sbin/nologin
     state: present
   loop: "{{ sftp_users }}"
@@ -33,7 +33,7 @@
     path: "/home/{{ item.name }}/sftp"
     state: directory
     owner: "{{ item.name }}"
-    group: sftp-group
+    group: "{{ sftp_group_name }}"
     mode: '0750'
   loop: "{{ sftp_users }}"
 
@@ -60,7 +60,7 @@
         X11Forwarding no
         PasswordAuthentication no
 
-      Match Group sftp-group
+      Match Group {{ sftp_group_name }}
         ChrootDirectory /home/%u
         ForceCommand internal-sftp
         AllowTcpForwarding no
