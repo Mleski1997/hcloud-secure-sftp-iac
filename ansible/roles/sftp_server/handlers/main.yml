@@ -1,4 +1,14 @@
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+
+- name: Restart ssh socket
+  systemd:
+    name: ssh.socket
+    state: restarted
+
 - name: Restart ssh
   service:
     name: ssh
     state: restarted
+

@@ -1,5 +1,5 @@
 Host jump_host
-    HostName 46.225.133.149
+    HostName 46.225.141.69
     User deployer
     IdentityFile /home/michal/.ssh/id_ed25519
 
