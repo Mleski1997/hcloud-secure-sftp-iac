@@ -1,0 +1,11 @@
+- name: Install and configure tools
+  apt:
+    name: "{{ jump_host_packages }}"
+    state: present
+
+- name: Ensure fail2ban is running
+  service:
+    name: fail2ban
+    state: started
+    enabled: true
+

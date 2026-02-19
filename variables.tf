@@ -16,6 +16,12 @@ variable "network_zone" {
   default     = "eu-central"
 }
 
+variable "net_range" {
+  description = "CIDR block for the network"
+  type        = string
+  default     = "10.0.0.0/16"
+}
+
 variable "subnet_cidr" {
   description = "CIDR block for the subnet"
   type        = string
@@ -32,6 +38,23 @@ variable "ssh_keys" {
 variable "ssh_allowed_ips" {
   description = "List of IPs allowed to access the SFTP server via SSH"
   type        = list(string)
-  default     = ["192.168.1.0/32"]
+  default     = ["5.173.216.34/32"]
 }
 
+variable "server_type" {
+  description = "Type of Hetzner Cloud server to create"
+  type        = string
+  default     = "cx23"
+}
+
+variable "server_image" {
+  description = "Image to use for the servers"
+  type        = string
+  default     = "ubuntu-24.04"
+}
+
+variable "server_location" {
+  description = "Location for the servers"
+  type        = string
+  default     = "nbg1"
+}
