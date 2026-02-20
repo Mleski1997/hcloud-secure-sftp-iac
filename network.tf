@@ -18,19 +18,18 @@ resource "hcloud_firewall" "host_firewall" {
     port        = "22"
     source_ips  = var.ssh_allowed_ips
     description = "Allow SSH from allowed IPs"
-
   }
 
-dynamic "rule" {
-  for_each = local.egress_rules
-  content {
-    description     = rule.value.desc
-    direction       = "out"
-    protocol        = rule.value.protocol
-    port            = rule.value.port
-    destination_ips = ["0.0.0.0/0", "::/0"]
+  dynamic "rule" {
+    for_each = local.egress_rules
+    content {
+      description     = rule.value.desc
+      direction       = "out"
+      protocol        = rule.value.protocol
+      port            = rule.value.port
+      destination_ips = ["0.0.0.0/0", "::/0"]
+    }
   }
-}
 
   apply_to {
     label_selector = "ssh=ssh_host,env=${var.env}"
@@ -55,24 +54,23 @@ resource "hcloud_firewall" "sftp_firewall" {
     source_ips  = var.sftp_client_allowed_ips
   }
 
-dynamic "rule" {
-  for_each = local.egress_rules
-  content {
-    description     = rule.value.desc
-    direction       = "out"
-    protocol        = rule.value.protocol
-    port            = rule.value.port
-    destination_ips = ["0.0.0.0/0", "::/0"]
+  dynamic "rule" {
+    for_each = local.egress_rules
+    content {
+      description     = rule.value.desc
+      direction       = "out"
+      protocol        = rule.value.protocol
+      port            = rule.value.port
+      destination_ips = ["0.0.0.0/0", "::/0"]
+    }
   }
-}
-
 
   apply_to {
     label_selector = "ssh=ssh_sftp,env=${var.env}"
   }
 }
 
-#Management IPS for VMs
+# Management IPs for VMs
 resource "hcloud_server_network" "jump_host_network" {
   network_id = hcloud_network.sftp_network.id
   server_id  = hcloud_server.jump_host.id
@@ -91,4 +89,3 @@ locals {
     { port = 443, protocol = "tcp", desc = "Allow HTTPS outbound" },
   ]
 }
-

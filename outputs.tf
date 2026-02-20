@@ -7,4 +7,3 @@ output "sftp_server" {
   value       = hcloud_server.sftp.ipv4_address
   description = "Public IP address of the SFTP server"
 }
-
