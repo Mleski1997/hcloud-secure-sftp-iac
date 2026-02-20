@@ -12,7 +12,7 @@ resource "local_file" "ansible_inventory" {
 
   filename = "${path.module}/ansible/inventory.ini"
 
-  
+
   depends_on = [
     hcloud_server_network.jump_host_network,
     hcloud_server_network.sftp_network

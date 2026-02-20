@@ -1,46 +1,43 @@
----
-    - name: Update and apt packages
-      apt:
-        update_cache: yes
-        upgrade: safe
+- name: Update and apt packages
+  apt:
+    update_cache: yes
+    upgrade: safe
         
+- name: Create deployer user
+  user:
+    name: "{{ deployer_user }}"
+    shell: /bin/bash
+    groups: sudo
+    append: yes
+    state: present
 
-    - name: Create deployer user
-      user:
-        name: "{{ deployer_user }}"
-        shell: /bin/bash
-        groups: sudo
-        append: yes
-        state: present
-
-    - name: Add authorized key for deployer
-      authorized_key: 
-        user: "{{ deployer_user }}"
-        state: present
-        key: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
+- name: Add authorized key for deployer
+  authorized_key: 
+    user: "{{ deployer_user }}"
+    state: present
+    key: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
       
+- name: no password sudo for deployer
+  lineinfile:
+      path: /etc/sudoers.d/{{ deployer_user }}
+      line: "{{ deployer_user }} ALL=(ALL) NOPASSWD: ALL"
+      state: present
+      create: yes
+      mode: '0440'
+      validate: 'visudo -cf %s'
 
-    - name: no password sudo for deployer
-      lineinfile:
-        path: /etc/sudoers.d/{{ deployer_user }}
-        line: "{{ deployer_user }} ALL=(ALL) NOPASSWD: ALL"
-        state: present
-        create: yes
-        mode: '0440'
-        validate: 'visudo -cf %s'
+- name: Disable root login
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PermitRootLogin'
+    line: 'PermitRootLogin no'
+    backup: yes
+  notify: Restart ssh
 
-    - name: Disable root login
-      lineinfile:
-        path: /etc/ssh/sshd_config
-        regexp: '^#?PermitRootLogin'
-        line: 'PermitRootLogin no'
-        backup: yes
-      notify: Restart ssh
-
-    - name: Disable ssh password authentication
-      lineinfile:
-        path: /etc/ssh/sshd_config
-        regexp: '^#?PasswordAuthentication'
-        line: 'PasswordAuthentication no'
-        backup: yes
-      notify: Restart ssh
+- name: Disable ssh password authentication
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PasswordAuthentication'
+    line: 'PasswordAuthentication no'
+    backup: yes
+  notify: Restart ssh

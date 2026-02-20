@@ -35,7 +35,7 @@ variable "ssh_keys" {
 
 
 variable "ssh_allowed_ips" {
-  description = "List of IPs allowed to access the SFTP server via SSH"
+  description = "IPs allowed to access the servers via SSH"
   type        = list(string)
 }
 
