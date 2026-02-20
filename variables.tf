@@ -31,14 +31,12 @@ variable "subnet_cidr" {
 variable "ssh_keys" {
   description = "List of SSH key names to be added to the server"
   type        = list(string)
-  default     = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMCijVu86B70NyfUF0QmYz3Wt/FWBeNYPPpBdZMJCwDQ mleski1997@gmail.com"]
 }
 
 
 variable "ssh_allowed_ips" {
   description = "List of IPs allowed to access the SFTP server via SSH"
   type        = list(string)
-  default     = ["5.173.216.34/32"]
 }
 
 variable "server_type" {
@@ -57,4 +55,16 @@ variable "server_location" {
   description = "Location for the servers"
   type        = string
   default     = "nbg1"
+}
+
+variable "env" {
+  description = "Deployment environment (e.g., dev, staging, prod)"
+  type        = string
+  default     = "dev"
+}
+
+variable "sftp_client_allowed_ips" {
+  description = "List of IPs allowed to access the SFTP server on port 2222"
+  type        = list(string)
+  default     = ["0.0.0.0/0", "::/0"]
 }

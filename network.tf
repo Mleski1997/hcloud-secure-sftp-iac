@@ -1,5 +1,5 @@
 resource "hcloud_network" "sftp_network" {
-  name     = "sftp-network"
+  name     = "${var.env}-sftp-network"
   ip_range = var.net_range
 }
 
@@ -10,10 +10,8 @@ resource "hcloud_network_subnet" "private_network" {
   network_zone = var.network_zone
 }
 
-
-
 resource "hcloud_firewall" "host_firewall" {
-  name = "host-firewall"
+  name = "${var.env}-host-firewall"
   rule {
     direction  = "in"
     protocol   = "tcp"
@@ -35,14 +33,14 @@ resource "hcloud_firewall" "host_firewall" {
     }
 
   apply_to {
-    label_selector = "ssh=ssh_host"
+    label_selector = "ssh=ssh_host,env=${var.env}"
   }
 }
 
 resource "hcloud_firewall" "sftp_firewall" {
-  name = "sftp-firewall"
+  name = "${var.env}-sftp-firewall"
   rule {
-    description = "Allow SSH form Jump Host private IP"
+    description = "Allow SSH from Jump Host private IP"
     direction  = "in"
     protocol   = "tcp"
     port       = "22"
@@ -54,7 +52,7 @@ resource "hcloud_firewall" "sftp_firewall" {
     direction = "in"
     protocol  = "tcp"
     port      = "2222"
-    source_ips = ["0.0.0.0/0", "::/0"]
+    source_ips = var.sftp_client_allowed_ips
   }
 
  dynamic "rule" {
@@ -70,7 +68,7 @@ resource "hcloud_firewall" "sftp_firewall" {
 
 
   apply_to {
-    label_selector = "ssh=ssh_sftp"
+    label_selector = "ssh=ssh_sftp,env=${var.env}"
   }
 }
 

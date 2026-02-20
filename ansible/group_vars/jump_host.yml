@@ -1,5 +1,8 @@
 jump_host_packages:
   - openssh-server
   - vim
-  - ufw
+  - htop 
+  - curl
+
+  
  

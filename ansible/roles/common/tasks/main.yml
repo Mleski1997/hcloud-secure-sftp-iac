@@ -37,7 +37,7 @@
         backup: yes
       notify: Restart ssh
 
-    - name: Unuse ssh password authentication
+    - name: Disable ssh password authentication
       lineinfile:
         path: /etc/ssh/sshd_config
         regexp: '^#?PasswordAuthentication'
