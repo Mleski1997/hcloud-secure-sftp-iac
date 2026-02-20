@@ -62,31 +62,7 @@ ansible-playbook -i ansible/inventory.ini ansible/site.yml
 - Jump host: `ssh jump_host` (using generated `ssh_config`)
 - SFTP: `sftp -P 2222 <user>@<sftp_public_ip>` (`<sftp_public_ip>` from Terraform output `sftp_server`)
 
-## Project Structure
-
-├── vm.tf
-├── network.tf
-├── variables.tf
-├── outputs.tf
-├── ansible.tf
-├── ssh_config.tf
-├── providers.tf
-├── versions.tf
-├── templates/
-│   └── user_data.yaml.tftpl
-├── ansible/
-│   ├── site.yml
-│   ├── inventory.ini
-│   ├── group_vars/
-│   └── roles/
-│       ├── common
-│       ├── jump_host
-│       ├── sftp_server
-│       
-└── terraform.tfvars.example
-
-
-00Each SFTP user gets a chrooted directory at `/home/<user>/sftp`.
+Each SFTP user gets a chrooted directory at `/home/<user>/sftp`.
 
 ## Outputs
 
