@@ -1,4 +1,4 @@
-- name : Apply common configuration to all servers
+- name: Apply common configuration to all servers
   hosts: all
   become: true
   roles:
