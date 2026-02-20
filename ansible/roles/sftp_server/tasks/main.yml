@@ -1,4 +1,10 @@
 
+- name: Install sftp server packages
+  apt:
+    name: "{{ sftp_package }}"
+    state: present
+    
+
 - name: Create sftp group
   group:
     name: "{{ sftp_group_name }}"
