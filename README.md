@@ -9,6 +9,9 @@ Terraform provisions infrastructure, and Ansible applies host configuration.
 - Administrators connect through a jump host (`ProxyJump`).
 - SSH access to the SFTP server on port `22` is allowed only from the private network.
 
+  <img width="1419" height="630" alt="image" src="https://github.com/user-attachments/assets/2c3f51ee-a179-4edb-85e5-0b203becc5de" />
+
+
 ## Requirements
 
 - Terraform (https://www.terraform.io/) `>= 1.0`
