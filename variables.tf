@@ -28,11 +28,11 @@ variable "subnet_cidr" {
   default     = "10.0.1.0/24"
 }
 
-variable "ssh_keys" {
-  description = "List of SSH key names to be added to the server"
+variable "deployer_ssh_public_keys" {
+  description = "List of public SSH keys to add to servers"
   type        = list(string)
+  default     = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMCijVu86B70NyfUF0QmYz3Wt/FWBeNYPPpBdZMJCwDQ"]
 }
-
 
 variable "ssh_allowed_ips" {
   description = "IPs allowed to access the servers via SSH"
@@ -66,5 +66,5 @@ variable "env" {
 variable "sftp_client_allowed_ips" {
   description = "List of IPs allowed to access the SFTP server on port 2222"
   type        = list(string)
-  default     = ["0.0.0.0/0", "::/0"]
+  default     = [ ]
 }

@@ -15,5 +15,4 @@
   become: true
   roles:
     - sftp_server
-    - test
-
+   

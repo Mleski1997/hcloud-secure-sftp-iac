@@ -1,0 +1,2 @@
+hcloud_token    = "" # Token Hetzner Cloud
+ssh_allowed_ips = [""] # your ip

@@ -1,3 +1,4 @@
 ---
 deployer_user: deployer
 sftp_group_name: sftp-group
+deployer_ssh_ansible: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMCijVu86B70NyfUF0QmYz3Wt/FWBeNYPPpBdZMJCwDQ"

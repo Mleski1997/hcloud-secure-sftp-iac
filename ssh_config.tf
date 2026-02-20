@@ -1,5 +1,5 @@
 resource "local_file" "ssh_config" {
-    content = <<-EOT
+  content = <<-EOT
     Host jump_host
         HostName ${hcloud_server.jump_host.ipv4_address}
         User deployer
@@ -12,8 +12,7 @@ resource "local_file" "ssh_config" {
         ProxyJump jump_host
         StrictHostKeyChecking yes
         IdentityFile ~/.ssh/id_ed25519
-    EOT 
+  EOT
 
-    filename = "${path.module}/ssh_config"
-            
+  filename = "${path.module}/ssh_config"
 }

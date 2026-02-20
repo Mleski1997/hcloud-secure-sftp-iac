@@ -1,9 +1,3 @@
 sftp_users:
   - name: user1
-    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMCijVu86B70NyfUF0QmYz3Wt/FWBeNYPPpBdZMJCwDQ mleski1997@gmail.com"
-  
-  - name: user2
     key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHhpXgSG3Hbc3bhXyUGcYaBHFS9b4GnFBunfdzRmcCga user2"
-  
-sftp_package:
-  - fail2ban

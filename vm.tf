@@ -10,7 +10,7 @@ resource "hcloud_server" "jump_host" {
   }
 
   user_data = templatefile("${path.module}/templates/user_data.yaml.tftpl", {
-    ssh_key = var.ssh_keys[0]
+    ssh_key = var.deployer_ssh_public_keys[0]
   })
 
   labels = {
@@ -31,8 +31,7 @@ resource "hcloud_server" "sftp" {
   }
 
   user_data = templatefile("${path.module}/templates/user_data.yaml.tftpl", {
-    ssh_key = var.ssh_keys[0]
-
+    ssh_key = var.deployer_ssh_public_keys[0]
   })
 
   labels = {
@@ -43,5 +42,5 @@ resource "hcloud_server" "sftp" {
 
 resource "hcloud_ssh_key" "ssh_key" {
   name       = "${var.env}-${var.project_name}-ssh-key"
-  public_key = var.ssh_keys[0]
+  public_key = var.deployer_ssh_public_keys[0]
 }
